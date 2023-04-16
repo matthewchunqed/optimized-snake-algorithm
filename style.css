@@ -1,0 +1,31 @@
+title{
+    margin: auto;
+    height: 100px;
+
+}
+/*defines main body color*/
+body{
+    margin: auto;
+    background-color: beige;
+}
+
+/*defines header title*/
+h1{
+    color: black;
+    font-size:50px;
+    text-align:  center;
+    align-self: center;
+    margin: auto;
+    width: 400px;
+}
+/*defines grayspace*/
+  .entire{
+    background-color: gray;
+    margin:auto;
+  }
+/*defines grid div without defining position or color of boxes*/
+  #grid {
+    margin:auto;
+    display: grid;
+    border: 2px solid black;
+    }

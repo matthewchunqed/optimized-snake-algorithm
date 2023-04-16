@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>About Page</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="tiles.js">
+    </script>
+    <!-- Loads in Javascript -->
+    <script>
+      window.onload = function() {
+	  drawTiles(6, 8);
+      }
+    </script>    
+  </head>
+  <body>
+    <div class="entire">
+    <h1>Perfect Snake</h1>
+    <!-- Title -->
+    <button onclick="start()">Start</button> <button onclick="step()">Step</button> <button onclick="animate()">Animate</button>
+    <!-- Buttons -->
+
+      <div id="grid">
+        <!-- Grid Space -->
+      </div>
+
+    </div>
+</body></html>
