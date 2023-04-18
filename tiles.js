@@ -1,16 +1,13 @@
 /*jslint browser:true */
 /*jshint esversion: 6 */
 var boxes = [];
-var head = null;
 var width = 0;
 var height = 0;
 var head = 0;
 var tail = -1;
 var path = [];
-var resetPoint = 0;
-var buttons = null;
-var gridWidth = 500;
-var gridHeight = 500;
+var gridWidth = 800;
+var gridHeight = 600;
 var curAnimation = null;
 var boxWidth = gridWidth/width - 2;
 var boxHeight = gridHeight/height - 2;
@@ -153,9 +150,16 @@ function drawTiles(width, height) {
 
     //create start button
     var button = document.createElement("button");
-    button.innerHTML = "Start";
+    button.innerHTML = "Reset";
     button.addEventListener("mousedown", event => {
-        //functionality for start button
+        head = 0;
+        tail = -1;
+        curAnimation = null;
+        for(i = 0; i < height; i++){
+            for(var j=0; j < width; j++){
+                boxes[i][j].style.backgroundColor = "white";
+            }
+        }
 
     }, false);
     entire.appendChild(button);
@@ -165,12 +169,15 @@ function drawTiles(width, height) {
 
         //edge case: check to see if game is completed, since we have strong insistence later to add white/red blocks:
         var isComplete = true;
-        for(var i = 0; i<height; i++){
+        for(i = 0; i<height; i++){
             for(var j=0; j < width; j++){
                 if(boxes[i][j].style.backgroundColor != "green"){
                     isComplete = false;
                 }
             }
+        }
+        if(path[head].style.backgroundColor == "green"){
+            isComplete = true;
         }
         if(isComplete){
             return;
@@ -242,12 +249,15 @@ function drawTiles(width, height) {
         if(!isComplete){
         //edge case: check to see if game is completed, since we have strong insistence later to add white/red blocks:
         isComplete = true;
-        for(var i = 0; i<height; i++){
+        for(i = 0; i<height; i++){
             for(var j=0; j < width; j++){
                 if(boxes[i][j].style.backgroundColor != "green"){
                     isComplete = false;
                 }
             }
+        }
+        if(path[head].style.backgroundColor == "green"){
+            isComplete = true;
         }
         if(isComplete){
             return;
