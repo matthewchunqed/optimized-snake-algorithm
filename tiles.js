@@ -54,11 +54,11 @@ function drawTiles(width, height) {
             temp = [];
         }
 
-        //now i'd like to reverse it so that (0,0) is at the bottom left.
-        boxes = boxes.reverse();
-
         grid.appendChild(div);
     }
+    
+    //now i'd like to reverse it so that (0,0) is at the bottom left.
+    boxes = boxes.reverse();
 
     //sets up what the correct path is algorithmically.
     if(width % 2 == 0){
@@ -79,26 +79,74 @@ function drawTiles(width, height) {
         }
     }else if(height % 2 == 0){
         //case 2: odd length but even height
-        for(var p=0; p < height; p++){
-            // path.push(boxes[p][0]);
-            path.push(boxes[0][0]);
-            path.push(boxes[0][1]);
-            path.push(boxes[0][2]);
-            path.push(boxes[0][3]);
+        for(i=0; i < height; i++){
+            path.push(boxes[i][0]);
+       }
+        for(i=height-1; i >= 0; i = i-1){
+            if(i % 2 == 0){
+                for(var j=width-1; j >= 1; j = j-1){
+                    path.push(boxes[i][j]);
+                }
+            }else{
+                for(var j=1; j < width; j++){
+                    path.push(boxes[i][j]);
+                }
+            }
         }
-        // for(i=height-1; i >= 0; i = i-1){
-        //     if(i % 2 == 0){
-        //         for(var j=width-1; j >= 1; j = j-1){
-        //             path.push(boxes[i][j]);
-        //             console.log(i + " " + j);
-        //         }
-        //     }else{
-        //         for(var j=1; j < width; j++){
-        //             path.push(boxes[i][j]);
-        //             console.log(i + " " + j);
-        //         }
-        //     }
-        // }
+    }else{
+
+        for(i=0; i < width; i++){
+            path.push(boxes[0][i]);
+        }
+        for(i=width-1; i >= 2; i = i-1){
+            if(i % 2 == 0){
+                for(var j=1; j < height; j++){
+                    path.push(boxes[j][i]);
+                }
+            }else{
+                for(var j=height-1; j >= 1; j = j-1){
+                    path.push(boxes[j][i]);
+                }
+            }
+        }
+        for(i = height-1; i> 1; i = i-1){
+            if(i % 2 == 0){
+                path.push(boxes[i][1]);
+                path.push(boxes[i][0]);
+            }else{
+                path.push(boxes[i][0]);
+                path.push(boxes[i][1]);
+            }
+        }
+        path.push(boxes[1][0]);
+
+        for(i=0; i < width; i++){
+            path.push(boxes[0][i]);
+        }
+        for(i=width-1; i >= 2; i = i-1){
+            if(i % 2 == 0){
+                for(var j=1; j < height; j++){
+                    path.push(boxes[j][i]);
+                }
+            }else{
+                for(var j=height-1; j >= 1; j = j-1){
+                    path.push(boxes[j][i]);
+                }
+            }
+        }
+        for(i = height-1; i> 2; i = i-1){
+            if(i % 2 == 0){
+                path.push(boxes[i][1]);
+                path.push(boxes[i][0]);
+            }else{
+                path.push(boxes[i][0]);
+                path.push(boxes[i][1]);
+            }
+        }
+        //path.push(boxes[3][0]);
+        path.push(boxes[2][1]);
+        path.push(boxes[1][1]);
+        path.push(boxes[1][0]);
     }
     
 
@@ -108,13 +156,17 @@ function drawTiles(width, height) {
     button.addEventListener("mousedown", event => {
         //functionality for start button
 
-
     }, false);
     entire.appendChild(button);
     button = document.createElement("button");
     button.innerHTML = "Step";
     button.addEventListener("mousedown", event => {
         //functionality for start button
+        if(head == 0){
+            var randWidth = Math.floor(Math.random() * width);
+            var randHeight = Math.floor(Math.random() * height);
+            boxes[randHeight][randWidth].style.backgroundColor = "red";
+        }
 
         path[head].style.backgroundColor = "green";
         if(tail >= 0){
