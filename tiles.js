@@ -11,6 +11,7 @@ var resetPoint = 0;
 var buttons = null;
 var gridWidth = 500;
 var gridHeight = 500;
+var curAnimation = null;
 var boxWidth = gridWidth/width - 2;
 var boxHeight = gridHeight/height - 2;
 
@@ -45,7 +46,7 @@ function drawTiles(width, height) {
         div.style.backgroundColor = "white";
         //adds colors
         div.addEventListener("mousedown", event => {
-            event.target.style.backgroundColor = "red";
+            //event.target.style.backgroundColor = "red";
           }, false);
         //mouse click to test color changing
         temp.push(div);
@@ -161,7 +162,21 @@ function drawTiles(width, height) {
     button = document.createElement("button");
     button.innerHTML = "Step";
     button.addEventListener("mousedown", event => {
-        //functionality for start button
+
+        //edge case: check to see if game is completed, since we have strong insistence later to add white/red blocks:
+        var isComplete = true;
+        for(var i = 0; i<height; i++){
+            for(var j=0; j < width; j++){
+                if(boxes[i][j].style.backgroundColor != "green"){
+                    isComplete = false;
+                }
+            }
+        }
+        if(isComplete){
+            return;
+        }
+
+        //functionality for step button
         var isNotRed = true;
         if(path[((head+1) % path.length)].style.backgroundColor == "red"){
             isNotRed = false;
@@ -170,13 +185,20 @@ function drawTiles(width, height) {
         var activate = false;
         if(path[head].style.backgroundColor == "red"){
             activate = true;
+            if(path[(head+1)%path.length].style.backgroundColor == "green"){
+                //the apple generation code insists that an apple be generated
+                //edge case game end condition: check to see if game is over.
+                path[head].style.backgroundColor = "green";
+                return;
+            }
         }
 
-        path[head].style.backgroundColor = "green";
+        
         if(tail >= 0){
             path[tail].style.backgroundColor = "white";
         }
-
+        path[head].style.backgroundColor = "green";
+        
         if(tail == -1 || activate){
             //add apples.
             var randWidth = Math.floor(Math.random() * width);
@@ -187,6 +209,7 @@ function drawTiles(width, height) {
                 randHeight = Math.floor(Math.random() * height);
             }
             boxes[randHeight][randWidth].style.backgroundColor = "red";
+            
         }
 
         head = head + 1;
@@ -209,7 +232,80 @@ function drawTiles(width, height) {
     button = document.createElement("button");
     button.innerHTML = "Animate";
     button.addEventListener("mousedown", event => {
-        //functionality for start button
+
+        
+        //functionality for animate button
+        var isComplete = false;
+        if (curAnimation == null) {
+            curAnimation = setInterval(() => {
+
+        if(!isComplete){
+        //edge case: check to see if game is completed, since we have strong insistence later to add white/red blocks:
+        isComplete = true;
+        for(var i = 0; i<height; i++){
+            for(var j=0; j < width; j++){
+                if(boxes[i][j].style.backgroundColor != "green"){
+                    isComplete = false;
+                }
+            }
+        }
+        if(isComplete){
+            return;
+        }
+                
+                //functionality for step button
+        var isNotRed = true;
+        if(path[((head+1) % path.length)].style.backgroundColor == "red"){
+            isNotRed = false;
+        }
+
+        var activate = false;
+        if(path[head].style.backgroundColor == "red"){
+            activate = true;
+            if(path[(head+1)%path.length].style.backgroundColor == "green"){
+                //the apple generation code insists that an apple be generated
+                //edge case game end condition: check to see if game is over.
+                path[head].style.backgroundColor = "green";
+                return;
+            }
+        }
+
+        
+        if(tail >= 0){
+            path[tail].style.backgroundColor = "white";
+        }
+        path[head].style.backgroundColor = "green";
+        
+        if(tail == -1 || activate){
+            //add apples.
+            var randWidth = Math.floor(Math.random() * width);
+            var randHeight = Math.floor(Math.random() * height);
+            
+            while(boxes[randHeight][randWidth].style.backgroundColor == "green"){
+                randWidth = Math.floor(Math.random() * width);
+                randHeight = Math.floor(Math.random() * height);
+            }
+            boxes[randHeight][randWidth].style.backgroundColor = "red";
+            
+        }
+
+        head = head + 1;
+        if(isNotRed){
+            tail = tail + 1;
+        }
+        
+        if(head >= path.length){
+            head = 0;
+        }
+        if(tail >= path.length){
+            tail = 0;
+        }
+
+    }
+
+            }, 200);
+            //adds the delay.
+        }
 
     }, false);
     entire.appendChild(button);
