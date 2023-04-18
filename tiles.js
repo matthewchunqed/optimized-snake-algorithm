@@ -162,18 +162,38 @@ function drawTiles(width, height) {
     button.innerHTML = "Step";
     button.addEventListener("mousedown", event => {
         //functionality for start button
-        if(head == 0){
-            var randWidth = Math.floor(Math.random() * width);
-            var randHeight = Math.floor(Math.random() * height);
-            boxes[randHeight][randWidth].style.backgroundColor = "red";
+        var isNotRed = true;
+        if(path[((head+1) % path.length)].style.backgroundColor == "red"){
+            isNotRed = false;
+        }
+
+        var activate = false;
+        if(path[head].style.backgroundColor == "red"){
+            activate = true;
         }
 
         path[head].style.backgroundColor = "green";
         if(tail >= 0){
             path[tail].style.backgroundColor = "white";
         }
+
+        if(tail == -1 || activate){
+            //add apples.
+            var randWidth = Math.floor(Math.random() * width);
+            var randHeight = Math.floor(Math.random() * height);
+            
+            while(boxes[randHeight][randWidth].style.backgroundColor == "green"){
+                randWidth = Math.floor(Math.random() * width);
+                randHeight = Math.floor(Math.random() * height);
+            }
+            boxes[randHeight][randWidth].style.backgroundColor = "red";
+        }
+
         head = head + 1;
-        tail = tail + 1;
+        if(isNotRed){
+            tail = tail + 1;
+        }
+        
         if(head >= path.length){
             head = 0;
         }
