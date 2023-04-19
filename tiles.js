@@ -313,7 +313,7 @@ function drawTiles(width, height) {
 
     }
 
-            }, 200);
+            }, 100);
             //adds the delay.
         }
 
