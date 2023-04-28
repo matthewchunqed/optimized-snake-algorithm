@@ -11,6 +11,7 @@ var gridHeight = 600;
 var curAnimation = null;
 var boxWidth = gridWidth/width - 2;
 var boxHeight = gridHeight/height - 2;
+var speedUp = 2;
 
 function drawTiles(width, height) {
     this.width = width;
@@ -313,7 +314,7 @@ function drawTiles(width, height) {
 
     }
 
-            }, 100);
+            }, 200/speedUp);
             //adds the delay.
         }
 
