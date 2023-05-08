@@ -4,30 +4,33 @@
 var speedUp = 2;
 
 function drawTiles(width, height) {
-var boxes = [];
-//var width = 0;
-//var height = 0;
-var head = 0;
-var tail = -1;
-var path = [];
-var gridWidth = 800;
-var gridHeight = 800;
-var curAnimation = null;
-var boxWidth = gridWidth/width - 2;
-var boxHeight = gridHeight/height - 2;
 
-
-
+    var boxes = [];
+    //var width = 0;
+    //var height = 0;
+    var head = 0;
+    var tail = -1;
+    var path = [];
+    var gridWidth = 700;
+    var gridHeight = 700;
+    var curAnimation = null;
+    var boxWidth = gridWidth/width - 2;
+    var boxHeight = gridHeight/height - 2;
 
     this.width = width;
     this.height = height;
     var grid = document.querySelector("#grid"), i, div;
     var entire = document.querySelector(".entire")
 
+    var body=document.querySelector("body");
+    body.style.backgroundImage="url(Images/Space.jpeg";
+    body.style.backgroundSize="200%";
+    body.style.backgroundRepeat="no-repeat";
+
     grid.style.width = gridWidth + "px";
     grid.style.height = gridHeight + "px";
-    entire.style.width = (gridWidth+150) + "px";
-    entire.style.height = (gridHeight+150) + "px";
+    entire.style.width = (gridWidth+200) + "px";
+    entire.style.height = (gridHeight+410) + "px";
     //formats entire grid + gray background around it.
 
     //size of cells
@@ -168,16 +171,17 @@ var boxHeight = gridHeight/height - 2;
                 boxes[i][j].style.backgroundColor = "white";
             }
         }
+        const textInput0=document.getElementById("speed");
+        const textInput1=document.getElementById("xCoord");
+        const textInput2=document.getElementById("yCoord");
+        textInput0.value="";
+        textInput1.value="";
+        textInput2.value="";
         return;
     }, false);
 
-    var pointer1=0;
-    var pointer2=0;
 
     var button2 =document.getElementById("button2");
-    //entire.appendChild(button);
-    //button = document.createElement("button");
-    //button2.innerHTML = "Step";
     button2.addEventListener("mousedown", event => {
         isReset=false;
 
@@ -261,11 +265,8 @@ var boxHeight = gridHeight/height - 2;
       }, false);
 
 
-        var button3=document.getElementById("button3");
-    //entire.appendChild(button);
-    //button = document.createElement("button");
-    //button.innerHTML = "Animate";
-
+    
+    var button3=document.getElementById("button3");
     button3.addEventListener("mousedown", event => {
         isReset=false;
 
@@ -372,7 +373,8 @@ var boxHeight = gridHeight/height - 2;
      var newSpeed=textInput.value;
      console.log(newSpeed);
      if(newSpeed<1){
-         textInput.value="Invalid Input! Speed should be greater than 0"
+         textInput.value="Invalid Input! Speed should be greater than 0";
+         return;
      }
      speedUp=newSpeed;
     }, false);
@@ -384,19 +386,24 @@ var boxHeight = gridHeight/height - 2;
      const textInput2=document.getElementById("yCoord");
      var newX=textInput1.value;
      var newY=textInput2.value;
+     if(newX<2){
+         textInput1.value="Invalid Input! Size should be greater than 1";
+     }
+     if(newY<2){
+         textInput2.value=textInput1.value="Invalid Input! Size should be greater than 1";;
+     }
+     if(newX<2||newY<2){
+         return;
+     }
+
      while(grid.firstChild){
          grid.removeChild(grid.firstChild)
      }
-     //grid.innerHTML="";
     draw(newX,newY);
-        //location.reload();
 
     }, false);
-
-
     
 }
-    //entire.appendChild(button);
 
 
 function draw(width,height){
@@ -404,10 +411,12 @@ function draw(width,height){
 }
 
 //implement color schemes gradient for older vs newer blocks (color blindness palettes)
-//buttons for determining the speed of the snake + the size of the grid
-//add detection of edge cases (width/heights of 0 or 1)
+//make head distinct
+//buttons for determining the speed of the snake + the size of the grid DONE
+//add detection of edge cases (width/heights of 0 or 1) DONE
 //reset stops the animation DONE
 //adds apple visualization instead of red block DONE
-//make head distinct
 //greedy implementation? show that a greedy counterexample fails
 //add lines to edges
+
+//push Quality/exposition/design//functionality

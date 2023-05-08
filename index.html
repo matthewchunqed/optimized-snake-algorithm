@@ -16,6 +16,21 @@
     <div class="entire">
     <h1>Perfect Snake</h1>
     <!-- Title -->
+    <div class="introText">
+    <p>Welcome to our final project webpage for COSC-225: Algorithms & Visualization. For this project, we chose to investigate 
+      how to engineer and visualize a perfect snake game. In this context, perfect does not imply that this is the most efficient solution,
+       but rather that the snake is always guaranteed to grow long enough to fill out at least n-1 squares of a grid of n squares (in some cases, it may
+       even fill up the entire grid!). This is accomplished by calculating safe Eulerian cycles (whenever possible) that allow the snake to travel along the entire
+      grid without self-intersecting itself, where the cycles are dependent on the grid dimensions. Here is some useful informatiom regarding user interface functionality:   </p>
+      <ul class="description" id="p2">
+        <li>The user may set the speed of the snake within the "Snake Speed" text box, and click the neighboring button to aply the change.</li>
+        <li>The user may set the width and height of the grid )in squares) using xWidth and yWidth, then resize it using the button.</li>
+        <li>Clicking "Step" illustrates a single step of the algorithm, moving the snake by one square along its path.</li>
+        <li>Clicking "Animate" illustrates each stage of the algorithm at regular intervals until it terminates.</li>
+        <li>Clicking "Reset" removes all apples and snakes from the grid and clears the Snake Speed, xWidth and yWidth input text boxes.</li>
+      </ul>
+    <p>More information on our algorithmic approach is available <a href="Exposition.html">here</a>!</p>
+    </div>
 
       <div id="grid">
         <!-- Grid Space -->
@@ -32,14 +47,6 @@
       <input type="text" id="yCoord" placeholder="yWidth">
       <button id="button5">Resize Grid</button> 
       </div>
-      <!--<div class="range">
-        <div class="'sliderVal">100</div>
-        <div class="slider">
-          <div class="leftVal">0</div>
-          <input type="range" min="0" max="200" value="100" steps="1">
-          <div class="rightVal">200</div>
-        </div>
-      </div>-->
       <script>
         window.onload = () => {
       draw(4,4);
