@@ -29,3 +29,20 @@ h1{
     display: grid;
     border: 2px solid black;
     }
+
+
+button{
+  background-color:lightblue;
+  width:100px;
+  margin:auto;
+  text-align:center;
+}
+
+#buttons{
+  text-align:center;
+  margin-top:10px;
+}
+
+range{
+  color:red;
+}

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en"><head>
     <meta charset="utf-8">
@@ -11,11 +12,6 @@
     <script src="tiles.js">
     </script>
     <!-- Loads in Javascript -->
-    <script>
-      window.onload = function() {
-	  drawTiles(10, 7);
-      }
-    </script>   
 
     <div class="entire">
     <h1>Perfect Snake</h1>
@@ -24,6 +20,21 @@
       <div id="grid">
         <!-- Grid Space -->
       </div>
-
+      <div id="buttons">
+      <button id="button1" onclick="ch.start()">Reset</button> <button id="button2" onclick="ch.step()">Step</button> <button id="button3" onclick="ch.animate()">Animate</button>
+      </div>
+      <div class="range">
+        <div class="'sliderVal">100</div>
+        <div class="slider">
+          <div class="leftVal">0</div>
+          <input type="range" min="0" max="200" value="100" steps="1">
+          <div class="rightVal">200</div>
+        </div>
+      </div>
+      <script>
+        window.onload = () => {
+      draw(10,10);
+        }
+      </script>   
     </div>
 </body></html>

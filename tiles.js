@@ -7,11 +7,13 @@ var head = 0;
 var tail = -1;
 var path = [];
 var gridWidth = 800;
-var gridHeight = 600;
+var gridHeight = 800;
 var curAnimation = null;
 var boxWidth = gridWidth/width - 2;
 var boxHeight = gridHeight/height - 2;
 var speedUp = 2;
+var isReset;
+var snakeLength=0;
 
 function drawTiles(width, height) {
     this.width = width;
@@ -150,9 +152,10 @@ function drawTiles(width, height) {
     
 
     //create start button
-    var button = document.createElement("button");
-    button.innerHTML = "Reset";
-    button.addEventListener("mousedown", event => {
+    var button1 = document.getElementById("button1");
+    //button1.innerHTML = "Reset";
+    button1.addEventListener("mousedown", event => {
+        isReset=true;
         head = 0;
         tail = -1;
         curAnimation = null;
@@ -161,12 +164,17 @@ function drawTiles(width, height) {
                 boxes[i][j].style.backgroundColor = "white";
             }
         }
-
+        return;
     }, false);
-    entire.appendChild(button);
-    button = document.createElement("button");
-    button.innerHTML = "Step";
-    button.addEventListener("mousedown", event => {
+
+
+
+    var button2 =document.getElementById("button2");
+    //entire.appendChild(button);
+    //button = document.createElement("button");
+    //button2.innerHTML = "Step";
+    button2.addEventListener("mousedown", event => {
+        isReset=false;
 
         //edge case: check to see if game is completed, since we have strong insistence later to add white/red blocks:
         var isComplete = true;
@@ -236,19 +244,27 @@ function drawTiles(width, height) {
       }, false);
 
 
-    entire.appendChild(button);
-    button = document.createElement("button");
-    button.innerHTML = "Animate";
-    button.addEventListener("mousedown", event => {
+        var button3=document.getElementById("button3");
+    //entire.appendChild(button);
+    //button = document.createElement("button");
+    //button.innerHTML = "Animate";
+
+    button3.addEventListener("mousedown", event => {
+        isReset=false;
 
         
         //functionality for animate button
         var isComplete = false;
         if (curAnimation == null) {
             curAnimation = setInterval(() => {
+                if(isReset==true){
+                    isComplete=true;
+                    return;
+                }
 
         if(!isComplete){
         //edge case: check to see if game is completed, since we have strong insistence later to add white/red blocks:
+
         isComplete = true;
         for(i = 0; i<height; i++){
             for(var j=0; j < width; j++){
@@ -296,7 +312,7 @@ function drawTiles(width, height) {
                 randWidth = Math.floor(Math.random() * width);
                 randHeight = Math.floor(Math.random() * height);
             }
-            boxes[randHeight][randWidth].style.backgroundColor = "red";
+            boxes[randHeight][randWidth].style.backgroundColor="red";
             
         }
 
@@ -319,5 +335,19 @@ function drawTiles(width, height) {
         }
 
     }, false);
-    entire.appendChild(button);
 }
+    //entire.appendChild(button);
+
+
+function draw(width,height){
+    ch = new drawTiles(width,height); 
+}
+
+//implement color schemes gradient for older vs newer blocks (color blindness palettes)
+//buttons for determining the speed of the snake + the size of the grid
+//add detection of edge cases (width/heights of 0 or 1)
+//add buttons for changing grid type (ie shape?)
+//reset stops the animation DONE
+//make head distinct
+//greedy implementation? show that a greedy counterexample fails
+//add lines to edges
