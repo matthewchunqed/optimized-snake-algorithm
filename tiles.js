@@ -4,7 +4,7 @@
 var speedUp = 2;
 
 function drawTiles(width, height) {
-    var boxes = [];
+var boxes = [];
 //var width = 0;
 //var height = 0;
 var head = 0;
@@ -368,7 +368,7 @@ var boxHeight = gridHeight/height - 2;
     //set new snake speed based on user input
     var button4 = document.getElementById("button4");
     button4.addEventListener("mousedown", event => {
-     const textInput=document.getElementById("myName");
+     const textInput=document.getElementById("speed");
      var newSpeed=textInput.value;
      console.log(newSpeed);
      if(newSpeed<1){
