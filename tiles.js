@@ -1,8 +1,12 @@
 /*jslint browser:true */
 /*jshint esversion: 6 */
-var boxes = [];
-var width = 0;
-var height = 0;
+
+var speedUp = 2;
+
+function drawTiles(width, height) {
+    var boxes = [];
+//var width = 0;
+//var height = 0;
 var head = 0;
 var tail = -1;
 var path = [];
@@ -11,11 +15,10 @@ var gridHeight = 800;
 var curAnimation = null;
 var boxWidth = gridWidth/width - 2;
 var boxHeight = gridHeight/height - 2;
-var speedUp = 2;
-var isReset;
-var snakeLength=0;
 
-function drawTiles(width, height) {
+
+
+
     this.width = width;
     this.height = height;
     var grid = document.querySelector("#grid"), i, div;
@@ -23,8 +26,8 @@ function drawTiles(width, height) {
 
     grid.style.width = gridWidth + "px";
     grid.style.height = gridHeight + "px";
-    entire.style.width = (gridWidth+100) + "px";
-    entire.style.height = (gridHeight+100) + "px";
+    entire.style.width = (gridWidth+150) + "px";
+    entire.style.height = (gridHeight+150) + "px";
     //formats entire grid + gray background around it.
 
     //size of cells
@@ -161,13 +164,15 @@ function drawTiles(width, height) {
         curAnimation = null;
         for(i = 0; i < height; i++){
             for(var j=0; j < width; j++){
+                boxes[i][j].style.background="none";
                 boxes[i][j].style.backgroundColor = "white";
             }
         }
         return;
     }, false);
 
-
+    var pointer1=0;
+    var pointer2=0;
 
     var button2 =document.getElementById("button2");
     //entire.appendChild(button);
@@ -201,6 +206,10 @@ function drawTiles(width, height) {
         var activate = false;
         if(path[head].style.backgroundColor == "red"){
             activate = true;
+
+            path[head].style.background="none";
+            path[head].style.backgroundColor="white";
+            
             if(path[(head+1)%path.length].style.backgroundColor == "green"){
                 //the apple generation code insists that an apple be generated
                 //edge case game end condition: check to see if game is over.
@@ -210,9 +219,12 @@ function drawTiles(width, height) {
         }
 
         
-        if(tail >= 0){
+        if(tail >= 0){    //resets the color of the most recently visited squares
             path[tail].style.backgroundColor = "white";
+            
+            path[head].style.background="none"; //removes the background image
         }
+
         path[head].style.backgroundColor = "green";
         
         if(tail == -1 || activate){
@@ -224,7 +236,12 @@ function drawTiles(width, height) {
                 randWidth = Math.floor(Math.random() * width);
                 randHeight = Math.floor(Math.random() * height);
             }
-            boxes[randHeight][randWidth].style.backgroundColor = "red";
+            pointer1=randHeight;
+            pointer2=randWidth;
+            boxes[randHeight][randWidth].style.backgroundImage = "url(Images/Apple.jpeg)";
+            boxes[randHeight][randWidth].style.backgroundSize="100%";
+            boxes[randHeight][randWidth].style.backgroundRepeat="no-repeat";
+            boxes[randHeight][randWidth].style.backgroundColor="red";
             
         }
 
@@ -289,6 +306,10 @@ function drawTiles(width, height) {
         var activate = false;
         if(path[head].style.backgroundColor == "red"){
             activate = true;
+
+            path[head].style.background="none";
+            path[head].style.backgroundColor="white";
+
             if(path[(head+1)%path.length].style.backgroundColor == "green"){
                 //the apple generation code insists that an apple be generated
                 //edge case game end condition: check to see if game is over.
@@ -300,6 +321,8 @@ function drawTiles(width, height) {
         
         if(tail >= 0){
             path[tail].style.backgroundColor = "white";
+
+            path[head].style.background="none";
         }
         path[head].style.backgroundColor = "green";
         
@@ -312,6 +335,12 @@ function drawTiles(width, height) {
                 randWidth = Math.floor(Math.random() * width);
                 randHeight = Math.floor(Math.random() * height);
             }
+            pointer1=randHeight;
+            pointer2=randWidth;
+            boxes[randHeight][randWidth].style.backgroundImage = "url(Images/Apple.jpeg)";
+            boxes[randHeight][randWidth].style.backgroundSize="100%";
+            boxes[randHeight][randWidth].style.backgroundRepeat="no-repeat";
+            boxes[randHeight][randWidth].style.backgroundColor="red";
             boxes[randHeight][randWidth].style.backgroundColor="red";
             
         }
@@ -335,6 +364,37 @@ function drawTiles(width, height) {
         }
 
     }, false);
+
+    //set new snake speed based on user input
+    var button4 = document.getElementById("button4");
+    button4.addEventListener("mousedown", event => {
+     const textInput=document.getElementById("myName");
+     var newSpeed=textInput.value;
+     console.log(newSpeed);
+     if(newSpeed<1){
+         textInput.value="Invalid Input! Speed should be greater than 0"
+     }
+     speedUp=newSpeed;
+    }, false);
+
+    //retrieve desired array size in x direction based on user input
+    var button5 = document.getElementById("button5");
+    button5.addEventListener("mousedown", event => {
+     const textInput1=document.getElementById("xCoord");
+     const textInput2=document.getElementById("yCoord");
+     var newX=textInput1.value;
+     var newY=textInput2.value;
+     while(grid.firstChild){
+         grid.removeChild(grid.firstChild)
+     }
+     //grid.innerHTML="";
+    draw(newX,newY);
+        //location.reload();
+
+    }, false);
+
+
+    
 }
     //entire.appendChild(button);
 
@@ -346,8 +406,8 @@ function draw(width,height){
 //implement color schemes gradient for older vs newer blocks (color blindness palettes)
 //buttons for determining the speed of the snake + the size of the grid
 //add detection of edge cases (width/heights of 0 or 1)
-//add buttons for changing grid type (ie shape?)
 //reset stops the animation DONE
+//adds apple visualization instead of red block DONE
 //make head distinct
 //greedy implementation? show that a greedy counterexample fails
 //add lines to edges

@@ -30,19 +30,60 @@ h1{
     border: 2px solid black;
     }
 
+    #buttons{
+      margin:auto;
+      text-align:center;
+    }
 
-button{
-  background-color:lightblue;
-  width:100px;
-  margin:auto;
-  text-align:center;
-}
+#button1{
+    background-color:lightblue;
+    width:80px;
+  }
 
-#buttons{
-  text-align:center;
-  margin-top:10px;
-}
+  #button1:hover{
+    background-color:blue;
+  }
 
-range{
-  color:red;
-}
+  #button2{
+    background-color:lightblue;
+    width:80px;
+  }
+
+  #button2:hover{
+    background-color:blue;
+  }
+
+  #button3{
+    background-color:lightblue;
+    width:80px;
+  }
+
+  #button3:hover{
+    background-color:blue;
+  }
+
+  #button4:hover{
+    background-color:red;
+  }
+
+  #myName{
+    width:250px;
+  }
+
+  #speedbar{
+    margin:auto;
+    text-align:center;
+  }
+
+  #resizebar{
+    margin:auto;
+    text-align:center;
+  }
+
+  #button5:hover{
+    background-color:red;   
+  }
+
+
+
+  

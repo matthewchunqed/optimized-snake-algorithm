@@ -21,19 +21,28 @@
         <!-- Grid Space -->
       </div>
       <div id="buttons">
-      <button id="button1" onclick="ch.start()">Reset</button> <button id="button2" onclick="ch.step()">Step</button> <button id="button3" onclick="ch.animate()">Animate</button>
+      <button id="button1">Reset</button> <button id="button2">Step</button> <button id="button3">Animate</button>
       </div>
-      <div class="range">
+      <div id="speedbar">
+      <input type="text" id="speed" placeholder="Snake Speed">
+      <button id="button4">Change Speed</button> 
+      </div>
+      <div id="resizebar">
+      <input type="text" id="xCoord" placeholder="xWidth">
+      <input type="text" id="yCoord" placeholder="yWidth">
+      <button id="button5">Resize Grid</button> 
+      </div>
+      <!--<div class="range">
         <div class="'sliderVal">100</div>
         <div class="slider">
           <div class="leftVal">0</div>
           <input type="range" min="0" max="200" value="100" steps="1">
           <div class="rightVal">200</div>
         </div>
-      </div>
+      </div>-->
       <script>
         window.onload = () => {
-      draw(10,10);
+      draw(4,4);
         }
       </script>   
     </div>
