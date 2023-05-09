@@ -98,10 +98,65 @@ h1{
   }
 
   .projectBox{
-    width:900px;
+    width:800px;
+    height:2000px;
     background-color:grey;
     margin:auto;
+    padding:10px;
   }
+
+  .cont{
+    display:table;
+    padding-top:10px;
+  }
+
+  #column1a{
+    width:50%;
+    float:left;
+    height:200px;
+    background-image:url("Documentation/Case1.png");
+    background-size:100% 100%;
+  }
+
+  #column1b{
+    width:50%;
+    float:left;
+    height:200px;
+    background-image:url("Documentation/Case2.png");
+    background-size:100% 100%;
+  }
+
+  #column1c{
+    width:50%;
+    float:left;
+    height:200px;
+    background-image:url("Documentation/Case3.png");
+    background-size:100% 100%;
+  }
+
+  #column1d{
+    width:50%;
+    float:left;
+    height:300px;
+    background-image:url("Documentation/Ex1.png");
+    background-size:100% 100%;
+  }
+
+  #column2{
+    width:46%;
+    float:right;
+    padding-left:10px;
+  }
+
+  #column1e{
+    width:50%;
+    float:left;
+    height:300px;
+    background-image:url("Documentation/Ex2.png");
+    background-size:100% 100%;
+  }
+
+  
 
 
 

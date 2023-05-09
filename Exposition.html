@@ -12,10 +12,57 @@
     <div class="projectBox">
     <h1>Project Documentation</h1>
     <!-- Title -->
-    
+
     <h2>I-Algorithm Functionality</h2>
+    <p>Our algorithm is entirely deterministic, and is entirely determined by the chosen grid dimensions. The reason for this is the following: introducing greedy algorithms would guarantee that for larger snake sizes, sub-optimal moves would lead to immediate game loss, which is an idea that is further developed in section II below.
+      We concluded early on in our design process that to guarantee that the game would always succeed, a fixed path was a required constraint. The process for said path calculation is explained below, and relies on the identification of Hamiltonian paths on the grid:
+    </p>
+    <div class="cont">
+      <div id="column1a"></div>
+      <div id="column2"><u>Case 1: Even by Even Grid &  Even by Odd Grid</u> </br>
+        In this case, there is a clearly defined Hamiltonian path that can be identified that returns the snake to its start point after passing over every tile, ensuring that all apples can be obtained so that the snake may reach its maximal length. 
+        In this case, since a Hamiltonian path exists, the snake will continue to grow until the snake fills the grid, at which point the head and tail will invariably collide and end the visualization.
+      </div>
+    </div>
+    <div class="cont">
+      <div id="column1b"></div>
+      <div id="column2"><u>Case 2: Odd by Even Grid</u><br>
+      Similarly to the previous case, there exists a Hamiltonian path that allows the snake to reach its maximal size without risk of self-intersection, although it is different to the one identified previously. As a result of this, the snake may once again fill the entire grid
+      before it invariably collides with its own tail once there are no more available tiles onto which to grow longer. 
+      </div>
+    </div>
+    <div class="cont">
+      <div id="column1c"></div>
+      <div id="column2"><u>Case3: Odd by Odd Grid</u><br>
+        No Hamiltonian cycle can be identified on any odd by odd grid, since there is eventually a point at which the remaining path diverges and each possible path (indicated in orange and green on the figure to the left) lead directly to the  starting tile. Therefore, we identify two alternating paths which allow any apple to be eaten in at most two grid traversals. 
+        However, this means that a snake may at most full n-1 tiles of a grid of n tiles, since its head is guaranteed to intersect the end of its tail completes the other possible path from the previous traversal.
+      </div>
+    </div>
+
 
     <h2>II-Greedy Implementations & Associated Obstacles</h2>
-    </div> 
+    <p>A common question that arose in discussion during class and project presentation workshops was the set path. Why did the algorithm follow a preset trajectory,
+      rather than greedily determining the optimal path to a given apple using a conventional graph search algorithm? We intially investigated greedy paradigms as a solution to this project,
+    but quickly ran into several major hurdles. The principal obstacles, and the challenges posed by each of them, are discussed in the examples below. </p>
+    <div class="cont">
+      <div id="column1d"></div>
+      <div id="column2">In this starting configuration, the red node represents the apple, the black node is the snake head and the green is its body. A greedy algorithm would calculate the 
+        shortest path to the apple then immediately follow it and turn left, since there is not immediate risk of collision. However, this would trap the snake within an enclosed 3x3 box, where it 
+        would be guaranteed to self-intersect, thus ending the game. In this instance, if the snake were shorter a game ending scenario would not be guaranteed, which further underscores the unpredictability of this scenario.
+        To utilize a greedy approach, we would have to check and ensure that the snake did not section off isolated sections of the grid, while also adjusting for snake size, which would be an increasingly important factor for smaller grid sizes.
+        These optimizations would not guarantee a perfect solution either, as when the snake approaches grid size, greedily pursuing the nearest apple would always induce a collision.
+      </div>
     </div>
+    <div class="cont">
+      <div id="column1e"></div>
+      <div id="column2"> In this starting configuration, we can clearly see that the shortest path from the snake's head to the apple is to continue straight ahead. However, this would clearly cause a self-intersection. Therefore, any greedy algorithm
+        would have to calculate the shortest path between the snake head and apple while treating the grid tiles already occupied by the snake as inaccessible. This poses a clear problem in this case, as there is no existing path between the snake head and apple
+        at this snapshot in time that fits this criteria. Hence, a greedy path-finding algorithm would fail at this point in time. A perfect implementation would consider not only the present position of each snake tile, but also their future states as the head moves, but
+        accounting for all the associated variables would be excessively complictaed, and more easily accomplished through the use of reinforcement learning, which would be outside the scope of this course. Even then, any deviation from the caculated path for large snake sizes would all but guarantee a game loss.
+      </div>
+    </div>
+
+    <h2>III-Other Tricky Implementation Quirks</h2>
+
+    </div> 
 </body></html>
