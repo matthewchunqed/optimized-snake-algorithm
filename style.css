@@ -38,33 +38,19 @@ h1{
   text-align:center;
   }
 
-/*sets width, bacground-color and hiver color of button1 */
-#button1{
-    background-color:lightblue;
+  .actionButton{
+    background-color:white;
     width:80px;
+    height:30px;
+    font-size:15px;
+    font-family:'Arial';
+    border-radius:12px;
+    border-color:red;
+    border-width: 5px;
   }
 
-  #button1:hover{
-    background-color:blue;
-  }
-
-/*sets width, bacground-color and hiver color of button2 */
-  #button2{
-    background-color:lightblue;
-    width:80px;
-  }
-
-  #button2:hover{
-    background-color:blue;
-  }
-/*sets width, bacground-color and hiver color of button3 */
-  #button3{
-    background-color:lightblue;
-    width:80px;
-  }
-
-  #button3:hover{
-    background-color:blue;
+  .actionButton:hover{
+    background-color:rgb(11, 229, 77);
   }
 
   /*sets hover color and widt of "change speed" button*/
@@ -98,7 +84,7 @@ h1{
   /*formats main documentation page*/
   .projectBox{
     width:800px;
-    height:2000px;
+    height:2030px;
     background-color:grey;
     margin:auto;
     padding:10px;
@@ -107,7 +93,7 @@ h1{
   /*creates container for dual column documentation display*/
   .cont{
     display:table;
-    padding-top:10px;
+    padding:5px;
   }
 
   /*styles image columns*/
@@ -161,8 +147,40 @@ h1{
     background-repeat:no-repeat;
   }
 
-  
+  #cont1{
+    background-color:rgb(219, 223, 234);
+  }
 
+  #cont2{
+    background-color:rgb(172, 177, 214);
+  }
+
+  #cont3{
+    background-color:rgb(130, 148, 196);
+
+  }
+
+  #box1{
+    background-color:rgb(255, 234, 210);
+  }
+
+  #box2{
+    background-color: rgb(191, 172, 224);
+  }
+
+  #cont4{
+    background-color:rgb(160, 132, 202);
+  }
+
+  #cont5{
+    background-color:rgb(130, 90, 170);
+  }
+
+  #cont6{
+    background-color:rgb(178, 164, 255);
+  }
+
+  
 
 
   

@@ -18,31 +18,30 @@
     <!-- Title -->
     <div class="introText">
     <p>Welcome to our final project webpage for COSC-225: Algorithms & Visualization. For this project, we chose to investigate 
-      how to engineer and visualize a perfect snake game. In this context, perfect does not imply that this is the most efficient solution,
-       but rather that the snake is always guaranteed to grow long enough to fill out at least n-1 squares of a grid of n squares (in some cases, it may
-       even fill up the entire grid!). This is accomplished by calculating safe Hamiltonian cycles (whenever possible) that allow the snake to travel along the entire
-      grid without self-intersecting itself, where the cycles are dependent on the grid dimensions. Here is some useful informatiom regarding user interface functionality:   </p>
+      how to engineer and visualize a <b>perfect snake game</b>. In this context, perfect <b>does not imply</b> that this is the most efficient solution,
+       but rather that the snake is always <b>guaranteed</b> to grow long enough to <b>fill out at least n-1 squares of a grid of n squares</b> (in some cases, it may
+       even fill up the entire grid!). This is accomplished by calculating safe <b>Hamiltonian cycles</b> (whenever possible) that allow the snake to travel along the entire
+      grid without self-intersecting itself, where the cycles are <b>dependent on the grid dimensions</b>. Below is some useful informatiom regarding user interface functionality, and additional information on our algorithmic approach is available <a href="Exposition.html">here</a>!:</p>
       <ul class="description" id="p2">
-        <li>The user may set the speed of the snake within the "Snake Speed" text box, and click the neighboring button to aply the change.</li>
-        <li>The user may set the width and height of the grid (in squares) using xWidth and yWidth, then resize it using the button.</li>
-        <li>Clicking "Step" illustrates a single step of the algorithm, moving the snake by one square along its path.</li>
-        <li>Clicking "Animate" illustrates each stage of the algorithm at regular intervals until it terminates.</li>
-        <li>Clicking "Reset" removes all apples and snakes from the grid and clears the Snake Speed, xWidth and yWidth input text boxes.</li>
+        <li>The user may <b>set the speed</b> of the snake within the "Snake Speed" text box, and click the neighboring button to apply the change.</li>
+        <li>The user may <b>set the width and height</b> of the grid (in squares) using xWidth and yWidth, then resize it using the button.</li>
+        <li>Clicking "Step" illustrates <b>a single step</b> of the algorithm, moving the snake by one square along its path.</li>
+        <li>Clicking "Animate" illustrates each stage of the algorithm at regular intervals <b>until it terminates</b>.</li>
+        <li>Clicking "Reset" <b>removes all apples and snakes from the grid</b> and <b>clears the input text boxes</b> for Snake Speed, xWidth and yWidth.</li>
       </ul>
-    <p>More information on our algorithmic approach is available <a href="Exposition.html">here</a>!</p>
     </div>
 
       <div id="grid">
         <!-- Grid Space -->
       </div>
-      <div id="buttons">
-      <button id="button1">Reset</button> <button id="button2">Step</button> <button id="button3">Animate</button>
+      <div class="bar">
+      <button class="actionButton" id="button1"><b>Reset</b></button> <button class="actionButton"  id="button2"><b>Step</b></button> <button class="actionButton"  id="button3"><b>Animate</b></button>
       </div>
-      <div id="speedbar">
+      <div class="bar">
       <input type="text" id="speed" placeholder="Snake Speed">
       <button id="button4">Change Speed</button> 
       </div>
-      <div id="resizebar">
+      <div class="bar">
       <input type="text" id="xCoord" placeholder="xWidth">
       <input type="text" id="yCoord" placeholder="yWidth">
       <button id="button5">Resize Grid</button> 
