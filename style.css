@@ -1,7 +1,7 @@
+/*sets title appearance*/
 title{
     margin: auto;
     height: 100px;
-
 }
 /*defines main body color*/
 body{
@@ -12,29 +12,33 @@ body{
 /*defines header title*/
 h1{
     color: black;
-    font-size:50px;
+    font-size:40px;
     text-align:  center;
     align-self: center;
     margin: auto;
     width: 500px;
 }
+
 /*defines grayspace*/
-  .entire{
-    background-color: gray;
-    margin:auto;
-  }
+.entire{
+  background-color: gray;
+  margin:auto;
+}
+
 /*defines grid div without defining position or color of boxes*/
-  #grid {
-    margin:auto;
-    display: grid;
-    border: 2px solid black;
-    }
+#grid {
+  margin:auto;
+  display: grid;
+  border: 2px solid black;
+}
 
-    #buttons{
-      margin:auto;
-      text-align:center;
-    }
+/*sets butto positions*/
+.bar{
+  margin:auto;
+  text-align:center;
+  }
 
+/*sets width, bacground-color and hiver color of button1 */
 #button1{
     background-color:lightblue;
     width:80px;
@@ -44,6 +48,7 @@ h1{
     background-color:blue;
   }
 
+/*sets width, bacground-color and hiver color of button2 */
   #button2{
     background-color:lightblue;
     width:80px;
@@ -52,7 +57,7 @@ h1{
   #button2:hover{
     background-color:blue;
   }
-
+/*sets width, bacground-color and hiver color of button3 */
   #button3{
     background-color:lightblue;
     width:80px;
@@ -62,41 +67,35 @@ h1{
     background-color:blue;
   }
 
+  /*sets hover color and widt of "change speed" button*/
   #button4:hover{
     background-color:red;
   }
 
-  #myName{
-    width:250px;
+  #speed{
+    width:270px;
   }
 
-  #speedbar{
-    margin:auto;
-    text-align:center;
-  }
-
-  #resizebar{
-    margin:auto;
-    text-align:center;
-  }
-
+  /*sets hover color of "resize grid" button*/
   #button5:hover{
     background-color:red;   
   }
 
+  /*sets width of lower text input boxes*/
   #xCoord{
     width:260px;
   }
-
   #yCoord{
     width:260px;
   }
 
+  /*formats text on main project page*/
   .introText{
     background-color:white;
     margin:10px;
   }
 
+  /*formats main documentation page*/
   .projectBox{
     width:800px;
     height:2000px;
@@ -105,57 +104,57 @@ h1{
     padding:10px;
   }
 
+  /*creates container for dual column documentation display*/
   .cont{
     display:table;
     padding-top:10px;
   }
 
-  #column1a{
+  /*styles image columns*/
+  .gridImgColumn{
     width:50%;
     float:left;
     height:200px;
-    background-image:url("Documentation/Case1.png");
     background-size:100% 100%;
   }
 
-  #column1b{
-    width:50%;
-    float:left;
-    height:200px;
-    background-image:url("Documentation/Case2.png");
-    background-size:100% 100%;
-  }
-
-  #column1c{
-    width:50%;
-    float:left;
-    height:200px;
-    background-image:url("Documentation/Case3.png");
-    background-size:100% 100%;
-  }
-
-  #column1d{
+  /*styles text columns*/
+  .greedyImgColumn{
     width:50%;
     float:left;
     height:300px;
-    background-image:url("Documentation/Ex1.png");
     background-size:100% 100%;
   }
 
+  /*attributes relevant documentation pictures*/
+  #column1a{
+    background-image:url("Documentation/Case1.png");
+  }
+
+  #column1b{
+    background-image:url("Documentation/Case2.png");
+  }
+
+  #column1c{
+    background-image:url("Documentation/Case3.png");
+  }
+
+  #column1d{
+    background-image:url("Documentation/Ex1.png");
+  }
+
+  #column1e{
+    background-image:url("Documentation/Ex2.png");
+  }
+
+  /*sets column formatting*/
   #column2{
     width:46%;
     float:right;
     padding-left:10px;
   }
 
-  #column1e{
-    width:50%;
-    float:left;
-    height:300px;
-    background-image:url("Documentation/Ex2.png");
-    background-size:100% 100%;
-  }
-
+  /*styles documentation background*/
   .entire2{
     background-image:url("Images/Space.jpeg");
     background-size:100% 100%;
