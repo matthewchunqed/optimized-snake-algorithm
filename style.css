@@ -23,6 +23,7 @@ h1{
 .entire{
   background-color: gray;
   margin:auto;
+  background-image: linear-gradient(to right, rgba(27, 76, 209, 0.7), rgba(210, 43, 177, 0.8));
 }
 
 /*defines grid div without defining position or color of boxes*/
@@ -53,21 +54,21 @@ h1{
     background-color:rgb(11, 229, 77);
   }
 
-  /*sets hover color and widt of "change speed" button*/
-  #button4:hover{
-    background-color:red;
+  /*styles input text box*/
+  .inputBox{
+    font-size:15px;
+    font-family:'Arial';
+    border-style:solid;
+    border-color:rgb(12, 242, 227);
+    border-width: 5px;
+    font-weight:bold;
   }
 
+
+  /*sets width of lower text input boxes*/
   #speed{
     width:270px;
   }
-
-  /*sets hover color of "resize grid" button*/
-  #button5:hover{
-    background-color:red;   
-  }
-
-  /*sets width of lower text input boxes*/
   #xCoord{
     width:260px;
   }
@@ -84,10 +85,9 @@ h1{
   /*formats main documentation page*/
   .projectBox{
     width:800px;
-    height:2030px;
-    background-color:grey;
     margin:auto;
     padding:10px;
+    background-image:linear-gradient(to right, rgba(27, 76, 209, 0.7), rgba(210, 43, 177, 0.8));
   }
 
   /*creates container for dual column documentation display*/
@@ -147,6 +147,17 @@ h1{
     background-repeat:no-repeat;
   }
 
+  /*set color of divs in the documentation section*/
+    
+  #box1{
+    background-color:rgb(255, 234, 210);
+  }
+
+  #cont0{
+    background-color:rgb(255, 234, 210);
+    padding-left:5px;
+  }
+
   #cont1{
     background-color:rgb(219, 223, 234);
   }
@@ -157,11 +168,6 @@ h1{
 
   #cont3{
     background-color:rgb(130, 148, 196);
-
-  }
-
-  #box1{
-    background-color:rgb(255, 234, 210);
   }
 
   #box2{
@@ -169,18 +175,26 @@ h1{
   }
 
   #cont4{
-    background-color:rgb(160, 132, 202);
+    background-color: rgb(191, 172, 224);
+    padding-left:5px;
   }
 
   #cont5{
-    background-color:rgb(130, 90, 170);
+    background-color:rgb(160, 132, 202);
   }
 
   #cont6{
+    background-color:rgb(130, 90, 170);
+  }
+
+  #cont7{
     background-color:rgb(178, 164, 255);
   }
 
-  
+  #soloText{
+    background-color:rgb(130, 148, 196);
+    padding:5px;
+  }
 
 
   

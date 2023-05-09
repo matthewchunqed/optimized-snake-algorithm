@@ -21,7 +21,7 @@ function drawTiles(width, height) {
     var boxHeight = gridHeight/height - 2;
 
     var curAnimation = null;
-    //var snakelength=1;
+    var snakelength=0;
 
     this.width = width;
     this.height = height;
@@ -76,7 +76,8 @@ function drawTiles(width, height) {
 
     //sets up what the correct path is algorithmically based on grid dimensions (number or tle per row/per column)
     if(width % 2 == 0){
-        //case 1: even width and height
+        //case 1: even width and height (refer to documentation for associated path)
+        //creates the specified path by pushing divs into the path array
         for(i=0; i < width; i++){
             path.push(boxes[0][i]);
         }
@@ -92,7 +93,7 @@ function drawTiles(width, height) {
             }
         }
     }else if(height % 2 == 0){
-        //case 2: odd width but even height
+        //case 2: odd width but even height (refer to documentation for associated path)
         for(i=0; i < height; i++){
             path.push(boxes[i][0]);
        }
@@ -108,7 +109,7 @@ function drawTiles(width, height) {
             }
         }
     }else{
-        //case 3: odd width and odd height
+        //case 3: odd width and odd height (refer to documentation for associated path)
 
         for(i=0; i < width; i++){
             path.push(boxes[0][i]);
@@ -163,14 +164,13 @@ function drawTiles(width, height) {
         path.push(boxes[1][0]);
     }
     
+    this.reset = function() {
 
-    //adds functionality for reset button
-    var button1 = document.getElementById("button1");
-    button1.addEventListener("mousedown", event => {
         //resets the value of flags and head/tail positions
         isReset=true;
         head = 0;
         tail = -1;
+        snakelength=0;
         curAnimation = null;
 
         //resets the appearance of the game grid
@@ -188,11 +188,11 @@ function drawTiles(width, height) {
         textInput1.value="";
         textInput2.value="";
         return;
-    }, false);
+    }
 
     //adds functionality for step button
-    var button2 =document.getElementById("button2");
-    button2.addEventListener("mousedown", event => {
+    this.step = function(){
+        
         isReset=false;
 
         //edge case: check to see if game is completed, since we have strong insistence later to add white/red blocks:
@@ -214,11 +214,7 @@ function drawTiles(width, height) {
             return;
         }
 
-        //functionality for step button
-        var isNotRed = true;
-        if(path[((head+1) % path.length)].style.backgroundColor == "red"){
-            isNotRed = false;
-        }
+
 
         //if the snake head reaches an apple
         var activate = false;
@@ -269,11 +265,27 @@ function drawTiles(width, height) {
             
         }
 
-        //moves the head tile forwards
-        head = head + 1;
-        //updates the tail tile
+        //functionality for step button: checks whether the next grid tile contains an apple
+        var isNotRed = true;
+        if(path[((head+1) % path.length)].style.backgroundColor == "red"){
+            isNotRed = false;
+            }
+
+        //updates the tail tile and decrements snakelength
         if(isNotRed){
             tail = tail + 1;
+            snakelength-=1;
+        }
+        //increments snakelength: when isNotRed==false and the peviosu conditional does not execute, this increases the total snake length by 1
+        snakelength+=1;
+        
+        //moves the head tile forwards
+        head = head + 1;
+
+        //handles edge case (second tile contains an apple)
+        if(head==2 && snakelength==2 && !isNotRed){
+            boxes[0][0].style.backgroundColor="green";
+            tail-=1;
         }
         
         //resets coordinates of head once a cycle has been completed
@@ -284,15 +296,13 @@ function drawTiles(width, height) {
         if(tail >= path.length){
             tail = 0;
         }
+    }
 
-      }, false);
+        //implements functionality for animate button
 
+    this.animate = function() {
 
-    //implements functionality for animate button
-    var button3=document.getElementById("button3");
-    button3.addEventListener("mousedown", event => {
         isReset=false;
-
         
         //creates an animation object and repeats the step action until either the 
         //game completes or the reset button is pressed
@@ -325,12 +335,6 @@ function drawTiles(width, height) {
         //completes the game
         if(isComplete){
             return;
-        }
-                
-        //functionality for step button
-        var isNotRed = true;
-        if(path[((head+1) % path.length)].style.backgroundColor == "red"){
-            isNotRed = false;
         }
 
         //if the snake head reaches an apple
@@ -380,69 +384,104 @@ function drawTiles(width, height) {
             
         }
 
-        head = head + 1;
-        if(isNotRed){
-            tail = tail + 1;
-        }
-        
-        if(head >= path.length){
-            head = 0;
-        }
-        if(tail >= path.length){
-            tail = 0;
-        }
+       //functionality for step button: checks whether the next grid tile contains an apple
+       var isNotRed = true;
+       if(path[((head+1) % path.length)].style.backgroundColor == "red"){
+           isNotRed = false;
+           }
+
+       //updates the tail tile and decrements snakelength
+       if(isNotRed){
+           tail = tail + 1;
+           snakelength-=1;
+       }
+       //increments snakelength: when isNotRed==false and the peviosu conditional does not execute, this increases the total snake length by 1
+       snakelength+=1;
+       
+       //moves the head tile forwards
+       head = head + 1;
+
+       //handles edge case (second tile contains an apple)
+       if(head==2 && snakelength==2 && !isNotRed){
+           boxes[0][0].style.backgroundColor="green";
+           tail-=1;
+       }
+       
+       //resets coordinates of head once a cycle has been completed
+       if(head >= path.length){
+           head = 0;
+       }
+       //resets coordinates of tail once a cycle has been completed
+       if(tail >= path.length){
+           tail = 0;
+       }
 
     }
             }, 200/speedUp);
             //adds the delay, which is dependent on the user input speedUp factor.
         }
-    }, false);
+    }
+
 
     //set new snake speed based on user input
-    var button4 = document.getElementById("button4");
-    button4.addEventListener("mousedown", event => {
+    this.speedChange = function() {
 
      //retrieves text input element and stores user input
      const textInput=document.getElementById("speed");
      var newSpeed=textInput.value;
     
-     //checks edge case and displays error message if input is outside of desired rage
-     if(newSpeed<1){
-         textInput.value="Invalid Input! Speed should be greater than 0";
-         return;
-     }
-     speedUp=newSpeed;  //updates the speedUp factor of the program
-    }, false);
+     if(isNaN(newSpeed)==false){
+        //checks edge case and displays error message if input is outside of desired rage
+        if(newSpeed<1){
+            textInput.value="Invalid Input! Speed should be greater than 0";
+            return;
+        }
+        speedUp=newSpeed;  //updates the speedUp factor of the program
+        }
+    else{
+        textInput.value="Invalid Input! This is not a number";
+        }
+    }
+
 
     //retrieve new grid dimensions based on user input
-    var button5 = document.getElementById("button5");
-    button5.addEventListener("mousedown", event => {
-    
+    this.gridChange = function() {
+
     //retrieves text input elements and stores user input
      const textInput1=document.getElementById("xCoord");
      const textInput2=document.getElementById("yCoord");
      var newX=textInput1.value;
      var newY=textInput2.value;
-
-     //checks edge case and displays error message if input is outside of desired range
-     if(newX<2){
-         textInput1.value="Invalid Input! Size should be greater than 1";
-     }
-     if(newY<2){
-         textInput2.value="Invalid Input! Size should be greater than 1";;
-     }
-
-     //if new grid dimensions are valid, removes previously inserted divs from the grid
-     //and calls draw again to fill in a new grid
-     if(newX>=2 && newY>=2){
-        while(grid.firstChild){
-            grid.removeChild(grid.firstChild)
-        }
-        draw(newX,newY);
-     }
-
-    }, false);
     
+     if(isNaN(newX)==false&&isNaN(newY)==false){
+
+        //checks edge case and displays error message if input is outside of desired range
+        if(newX<2){
+            textInput1.value="Invalid Input! Size should be greater than 1";
+        }
+        if(newY<2){
+            textInput2.value="Invalid Input! Size should be greater than 1";
+        }
+
+        //if new grid dimensions are valid, removes previously inserted divs from the grid
+        //and calls draw again to fill in a new grid
+        if(newX>=2 && newY>=2){
+            while(grid.firstChild){
+                grid.removeChild(grid.firstChild)
+            }
+            draw(newX,newY);
+            }
+        }
+    else{
+        if(isNaN(newX)==true){
+            textInput1.value="Invalid Input! This is not a number";
+            }
+        if(isNaN(newY)==true){
+            textInput2.value="Invalid Input! This is not a number";
+            }
+        }
+    }
+
 }
 
 
@@ -450,14 +489,27 @@ function draw(width,height){
     ch = new drawTiles(width,height); 
 }
 
-//implement color schemes gradient for older vs newer blocks (color blindness palettes)
+
+//TO DO STILL
+//complete submission form and discuss point distribution with Matt
 //make head distinct
-//fix edge case when apple generates next to initial position
+
+//implement color schemes gradient for older vs newer blocks (color blindness palettes) TOO TRICKY
+//add Matt comments to description section DONE
+//set color of snake? (for added user interactivity) UNNEEDED
+//add edge case management for letters and symbols in input text columns DONE
+//adapt modular components DONE
+//add comments for array section ISH-ASK MATT   
+//display page styling DONE
+//make buttons + inputs more visible (enlarge + stylise) DONE
+//condense css where possible DONE
+//fix edge case when apple generates next to initial position DONE
+//complete implementation challenges section of documentation DONE
+//format text nicer for documentation DONE
+//add bold and underline setions to text DONE
 //buttons for determining the speed of the snake + the size of the grid DONE
 //add detection of edge cases (width/heights of 0 or 1) DONE
 //reset stops the animation DONE
 //adds apple visualization instead of red block DONE
-//greedy implementation? show that a greedy counterexample fails
-//add lines to edges
-
-//push Quality/exposition/design//functionality
+//greedy implementation? show that a greedy counterexample fails DONE
+//add lines to edges Not necessary

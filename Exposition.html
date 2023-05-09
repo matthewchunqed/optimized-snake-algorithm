@@ -15,10 +15,12 @@
     <!-- Title -->
     
     <div id="box1">
+      <div id="cont0">
     <h2>I-Algorithm Functionality</h2>
     <p>Our algorithm is <b>entirely deterministic</b>, and is entirely determined by the chosen grid dimensions. The reason for this is the following: introducing greedy algorithms would guarantee that for larger snake sizes, sub-optimal moves would lead to <b>immediate game loss</b>, which is an idea that is further developed in section II below.
       We concluded early on in our design process that to guarantee that the game would <b>always succeed</b>, a fixed path was a <b>required constraint</b>. The process for said path calculation is explained below, and relies on the <b>identification of characteristic Hamiltonian paths</b> on the grid:
     </p>
+  </div>
     <div class="cont" id="cont1">
       <div class="gridImgColumn" id="column1a"></div>
       <div id="column2"><u>Case 1: Even by Even Grid & Even by Odd Grid</u> </br>
@@ -37,17 +39,27 @@
       <div class="gridImgColumn" id="column1c"></div>
       <div id="column2"><u>Case3: Odd by Odd Grid</u><br>
         <b>No Hamiltonian cycle can be identified</b> on any odd by odd grid, since there is eventually a point at which the remaining path diverges and each possible path (indicated in orange and green on the figure to the left) lead directly to the  starting tile. Therefore, we <b>identify two alternating paths</b> which allow any apple to be eaten in at most two grid traversals. 
-        However, this means that a snake may <b>at most fill n-1 tiles of a grid of n tiles</b>, since its head is guaranteed to intersect the end of its tail completes the other possible path from the previous traversal.
+        This means that a snake may <b>at most fill n-1 tiles of a grid of n tiles</b>, as its head is guaranteed to hit the end of its tail completes the other possible path from the previous traversal.
       </div>
     </div>
+    <div id="soloText">Let's think some more about why odd by odd grids are so special. Let us define directions to either be away from or towards the starting corner(lower-left).
+      If the grid has an even length of either columns or rows, one can constuct a path going away/towards/away/towards... (relative to the snake origin) and <b>fill the space</b> while ending where you started because your path ultimately started with the snake <b>moving away</b> from the starting corner and ending <b>going towards it</b>.
+      However, with odd x odd, you can't pick away/towards/away for the set of either columns or rows because you'll <b>end up moving away from the start node</b> in whichever direction (horizontal/vertical) you choose. Now, consider an approach of swapping between traversing an entire row 
+      and then a column and then another column (etc). Can this allow the snake to <b>start travelling away from the start point</b> (either horizontally or vertically) and <b>end up going towards it</b> (in the opposite direction relative to the starting movement)?  In fact, this approach <b>cannot succeed</b>. In order to end up going towards the starting corner in the y direction, the snake must choose a 
+      point to move towards the starting corner <b>in the x direction too</b> (to go to the left most column). But as we said before, there's no permutation of away/towards/away/towards movements in the x-direction that <b>touches every single block</b>. Therefore, the snake must miss at least <b>one block along the x direction</b>
+       and <b>one across the y direction</b>. An optimal algorithm can have these blocks <b>coincide</b>, which is why our snake misses one block per cycle in this case.</div>
   </div>
 
     <div id="box2">
+      <div id="cont4">
     <h2>II-Greedy Implementations & Associated Obstacles</h2>
     <p>A common question that arose in discussion during class and project presentation workshops was the set path. Why did the algorithm follow a <b>preset trajectory</b>,
-      rather than <b>greedily</b> determining the optimal path to a given apple using a conventional graph search algorithm? We intially investigated greedy paradigms as a solution to this project,
-    but quickly ran into several major hurdles. The principal obstacles, and the challenges posed by each of them, are discussed in the examples below. </p>
-    <div class="cont" id="cont4">
+      rather than <b>greedily</b> determining the optimal path to a given apple or using a conventional graph search algorithm? We intially investigated greedy paradigms as a solution to this project,
+    but quickly ran into several major hurdles. Greedy algorithms use <b>only local information</b> to continually make the best decision. Other search algorithms such as BFS and DFS look farther along the possible outcomes to find the best one. But either way, the snake's goal is <b>eventually</b> to fill as much of grid as possible. 
+    So even an algorithm searching the entire set of "paths" to find a "winning path" would <b>collapse to a preset, deterministic algorithm</b> once the snake is so big that it has effectively no choice left in where it must go to not terminate itself. 
+    In that sense, both greedy algorithms and other search algorithms do <b>too much decision making</b> for what's needed in the limit case of the snake's growth. Some examples of the challenges posed by greedy implementations are discussed in the examples below: </p>
+  </div>
+    <div class="cont" id="cont5">
       <div class="greedyImgColumn" id="column1d"></div>
       <div id="column2">In this starting configuration, the red node represents the apple, the black node is the snake head and the green is its body. A greedy algorithm would calculate the 
         shortest path to the apple then immediately follow it and turn left, since there is not immediate risk of collision. However, this would trap the snake within an <b>enclosed</b> 3x3 box, where it 
@@ -56,17 +68,17 @@
         These optimizations would not guarantee a perfect solution either, as when the snake approaches grid size, greedily pursuing the nearest apple <b>would always section the grid and induce a collision</b>.
       </div>
     </div>
-    <div class="cont" id="cont5">
+    <div class="cont" id="cont6">
       <div class="greedyImgColumn" id="column1e"></div>
-      <div id="column2"> In this starting configuration, we can clearly see that the shortest path from the snake's head to the apple is to continue straight ahead. However, this would clearly cause a self-intersection. Therefore, any greedy algorithm
-        would have to calculate the shortest path between the snake head and apple while treating the grid tiles already occupied by the snake as inaccessible. This poses a clear problem in this case, as there is no existing path between the snake head and apple
+      <div id="column2"> In this starting configuration, we can clearly see that the shortest path from the snake's head to the apple is to continue <b>straight ahead</b>. However, this would clearly cause a self-intersection. Therefore, any greedy algorithm
+        would have to calculate the shortest path between the snake head and apple while treating the grid tiles already occupied by the snake as inaccessible. This poses a clear problem in this case, as there is <b>no existing path between the snake head and apple</b>
         at this snapshot in time that fits this criteria. Hence, a greedy path-finding algorithm would fail at this point in time. A perfect implementation would consider not only the present position of each snake tile, but also their future states as the head moves, but
-        accounting for all the associated variables would be excessively complictaed, and more easily accomplished through the use of reinforcement learning, which would be outside the scope of this course. Even then, any deviation from the caculated path for large snake sizes would all but guarantee a game loss.
+        accounting for all the associated variables would be excessively complicated, and more easily accomplished through the use of reinforcement learning, which would be outside the scope of this course. Even then, <b>any deviation from the calculated path for large snake sizes</b> would all but guarantee a game loss.
       </div>
     </div>
   </div>
 
-    <div id="cont6">
+    <div id="cont7">
     <h2>III-Other Project Challenges Encountered</h2>
     <ul>
       <li>Displaying the image of an apple in the grid was unexpectedly tricky, and required sustained experimenting with the <b>background-Image attribute</b> to eventually come to fruition.</li>
@@ -75,8 +87,9 @@
       <li>Resizing the grid was also a non-trivial task that was ultimately solved with a few lines of code. Our grid would overflow when calling the draw() method again, and we spent time tweaking the css properties of the grid to prevent this issue. We the  realized that draw() was actually <b>appending extra divs to the grid element</b>
         without clearing the previous version, which we solved through a combination of <b>local variable declaration</b> (rather than global) and the <b>removal of child elements of the grid element</b> before calling the draw function again.   </li>
     </ul>
+    <p><a href="index.html">Here</a> is a link back to the main page! Thanks for visiting!</p>
   </div>
-
+  
     </div> 
   </div>
 </body></html>
