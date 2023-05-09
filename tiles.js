@@ -31,7 +31,7 @@ function drawTiles(width, height) {
     //sets background image and formats it appropriately
     var body=document.querySelector("body");
     body.style.backgroundImage="url(Images/Space.jpeg";
-    body.style.backgroundSize="200%";
+    body.style.backgroundSize="100% 100%";
     body.style.backgroundRepeat="no-repeat";
     
     //sets width and height of the snake grid and of the div containing it
