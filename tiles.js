@@ -570,6 +570,31 @@ function drawTiles(width, height) {
     //set new snake speed based on user input
     this.speedChange = function() {
 
+    var animateAfter = false;
+    if(curAnimation != null){
+        animateAfter = true;
+    }
+
+    //resets current animation first:
+    isReset=true;
+    head = 0;
+    tail = -1;
+    snakelength=0;
+    curAnimation = null;
+
+    //resets the appearance of the game grid
+    for(i = 0; i < height; i++){
+        for(var j=0; j < width; j++){
+            boxes[i][j].style.background="none";
+            boxes[i][j].style.backgroundColor = "white";
+        }
+    }
+    //clears the text input boxes
+    const textInput1=document.getElementById("xCoord");
+    const textInput2=document.getElementById("yCoord");
+    textInput1.value="";
+    textInput2.value="";
+
      //retrieves text input element and stores user input
      const textInput=document.getElementById("speed");
      var newSpeed=textInput.value;
@@ -582,11 +607,17 @@ function drawTiles(width, height) {
             return;
         }
         speedUp=newSpeed;  //updates the speedUp factor of the program
+        if(animateAfter){
+            this.animate();
+        }
+
         }
         //if input is not a number, show an error message
     else{
         textInput.value="Invalid Input! This is not a number";
         }
+        textInput.value="";
+
     }
 
 
