@@ -396,6 +396,7 @@ function drawTiles(width, height) {
             for(var j=0; j < width; j++){
                 if(boxes[i][j].style.backgroundColor == "white" || boxes[i][j].style.backgroundColor != "red"){
                     isComplete=false;
+                    break;
                 }
             }
             if(isComplete==false){
