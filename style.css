@@ -39,6 +39,14 @@ h1{
   text-align:center;
   }
 
+  #button4{
+    width:130px;
+  }
+
+  #button5{
+    width:130px;
+  }
+
   .actionButton{
     background-color:white;
     width:80px;
