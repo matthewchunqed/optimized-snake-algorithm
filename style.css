@@ -75,13 +75,13 @@ h1{
 
   /*sets width of lower text input boxes*/
   #speed{
-    width:270px;
+    width:320px;
   }
   #xCoord{
-    width:260px;
+    width:310px;
   }
   #yCoord{
-    width:260px;
+    width:310px;
   }
 
   /*formats text on main project page*/

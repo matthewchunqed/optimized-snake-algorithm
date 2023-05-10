@@ -35,16 +35,16 @@
         <!-- Grid Space -->
       </div>
       <div class="bar">
-      <button class="actionButton" id="button1"><b>Reset</b></button> <button class="actionButton"  id="button2"><b>Step</b></button> <button class="actionButton"  id="button3"><b>Animate</b></button>
+      <button class="actionButton" id="button1" onclick="ch.reset()"><b>Reset</b></button> <button class="actionButton"  id="button2" onclick="ch.step()"><b>Step</b></button> <button class="actionButton"  id="button3" onclick="ch.animate()"><b>Animate</b></button>
       </div>
       <div class="bar">
-      <input type="text" id="speed" placeholder="Snake Speed">
-      <button id="button4">Change Speed</button> 
+      <input type="text" class="inputBox" id="speed" placeholder="Snake Speed">
+      <button id="button4" class="actionButton" onclick="ch.speedChange()"><b>Change Speed</b></button> 
       </div>
       <div class="bar">
-      <input type="text" id="xCoord" placeholder="xWidth">
-      <input type="text" id="yCoord" placeholder="yWidth">
-      <button id="button5">Resize Grid</button> 
+      <input type="text" class="inputBox" id="xCoord" placeholder="xWidth">
+      <input type="text" class="inputBox" id="yCoord" placeholder="yWidth">
+      <button id="button5" class="actionButton" onclick="ch.gridChange()"><b>Resize Grid</b></button> 
       </div>
       <script>
         window.onload = () => {
