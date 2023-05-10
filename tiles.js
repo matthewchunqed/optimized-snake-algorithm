@@ -388,22 +388,21 @@ function drawTiles(width, height) {
         //as long as the game has not completed/ repeatedly runs the step() code
         //the code contained in this loop is the same as previously defined in step()
         if(!isComplete){
-        //edge case: check to see if game is completed, since we have strong insistence later to add white/red blocks:
         
         //edge case: check to see if game is completed, since we have strong insistence later to add white/red blocks:
         //if any tiles are red(apples) or white(unnocupied), then the snake still has room to grow and the game does not end
-        var isComplete = true;
+        isComplete = true;
         for(i = 0; i<height; i++){
             for(var j=0; j < width; j++){
                 if(boxes[i][j].style.backgroundColor == "white" || boxes[i][j].style.backgroundColor != "red"){
                     isComplete=false;
-                    break;
                 }
             }
             if(isComplete==false){
                 break;
             }
         }
+
         //if the next tile in the path is the snake's tail, the snake self-intersects and the game ends
         if(path[head].style.backgroundColor != "white" && path[head].style.backgroundColor != "red"){
             isComplete = true;
@@ -459,7 +458,7 @@ function drawTiles(width, height) {
                 }
                 //sets color of snake head to black
                 path[head].style.backgroundColor="black";
-
+                
                 //ends the game since no new apples can be generated
                 return;
             }
